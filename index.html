@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Léa &amp; Gautier · 1er juin 2027</title>
+<meta name="description" content="Léa & Gautier se marient le 1er juin 2027 à Tallard. Merci de nous dire si vous serez des nôtres.">
+<meta name="theme-color" content="#f5ede0">
+<meta property="og:title" content="Léa & Gautier · 1er juin 2027">
+<meta property="og:description" content="Merci de nous dire si vous serez des nôtres.">
+<meta property="og:image" content="lieu.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f5ede0;
+  --ink:#2e2a24;
+  --ink-soft:#6e665a;
+  --line:#d6c8b2;
+  --poppy:#c0402b;
+  --lavender:#7a68a6;
+  --olive:#5f6b45;
+  --serif:"EB Garamond", Georgia, "Times New Roman", serif;
+  --sans:"Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.6;
+  overflow-x:hidden;
+}
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.3  0 0 0 0 0.25  0 0 0 0 0.2  0 0 0 .09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;font-weight:400}
+
+/* ================= Scène qui défile ================= */
+.stage{position:relative;height:300svh}
+.sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:#e9dcc6}
+.layer{position:absolute;inset:0;will-change:opacity,transform}
+.layer svg{width:100%;height:100%;display:block}
+#lPoppy,#lPhoto{opacity:0}
+
+/* Scène 3 : photo du lieu, fond flou + cadre net en arche */
+.photo-bg{position:absolute;inset:-40px;background:url(lieu.jpg) center/cover;filter:blur(22px) saturate(1.1);transform:scale(1.1)}
+.photo-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,24,18,.15),rgba(30,24,18,.55) 70%,rgba(30,24,18,.75))}
+.frame{
+  position:absolute;left:50%;top:max(9svh,56px);transform:translateX(-50%);
+  width:min(86vw,640px);aspect-ratio:4/3.4;
+  border-radius:999px 999px 6px 6px;overflow:hidden;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.45);
+  border:6px solid var(--paper);
+}
+.frame img{width:100%;height:100%;object-fit:cover;object-position:42% 60%;display:block;transform-origin:50% 70%;will-change:transform}
+@media (min-width:900px){.frame{width:min(46vw,620px);aspect-ratio:16/11;top:10svh}}
+
+/* Textes des scènes */
+.steps{position:relative;margin-top:-100svh}
+.step{height:100svh;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px}
+.step-hero,.step-date{justify-content:flex-start;padding-top:max(13svh,72px)}
+.step-lieu{justify-content:flex-end;padding-bottom:max(9svh,48px);color:var(--paper)}
+.step > *{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform .9s ease}
+.step.in > *{opacity:1;transform:none}
+.step.in > *:nth-child(2){transition-delay:.1s}
+.step.in > *:nth-child(3){transition-delay:.2s}
+.step.in > *:nth-child(4){transition-delay:.3s}
+
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(58px,17vw,128px);line-height:.9;letter-spacing:-.015em;margin:18px 0 0}
+h1 .amp{font-style:italic;color:var(--poppy);font-size:.55em;display:block;margin:.08em 0}
+@media (min-width:900px){h1 .amp{display:inline;margin:0 .15em}}
+.sub{font-family:var(--serif);font-style:italic;font-size:clamp(20px,5vw,26px);margin-top:14px}
+.cue{position:absolute;bottom:max(4svh,22px);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--paper);text-shadow:0 1px 8px rgba(0,0,0,.4);transition:opacity .4s}
+.cue i{width:1px;height:42px;background:currentColor;transform-origin:top;animation:drop 2.2s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:top}50.1%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+.big-date{font-family:var(--serif);font-weight:400;font-size:clamp(64px,19vw,150px);line-height:.88;letter-spacing:-.02em;margin-top:16px}
+.big-date sup{font-size:.35em}
+.big-date em{display:block;font-size:.3em;color:var(--poppy);letter-spacing:0;margin-top:.3em}
+.countdown{display:flex;gap:28px;justify-content:center;margin-top:26px}
+.countdown div{display:flex;flex-direction:column;align-items:center}
+.countdown b{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1}
+.countdown span{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+
+.lieu-title{font-family:var(--serif);font-weight:400;font-size:clamp(38px,10vw,64px);line-height:1;margin-top:12px}
+.lieu-addr{font-size:15px;opacity:.9;margin-top:10px;letter-spacing:.02em}
+.btn-ghost{display:inline-block;margin-top:20px;padding:12px 22px;border:1px solid rgba(245,237,224,.7);color:var(--paper);text-decoration:none;font-size:11px;letter-spacing:.26em;text-transform:uppercase;transition:background .25s,color .25s}
+.btn-ghost:hover{background:var(--paper);color:var(--ink)}
+
+/* ================= Formulaire ================= */
+.rsvp{position:relative;background:var(--paper);padding:88px 24px 40px}
+.rsvp-inner{max-width:540px;margin:0 auto}
+.sprig{display:block;margin:0 auto 26px;width:120px;height:auto}
+.rsvp h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,11vw,60px);line-height:1;text-align:center}
+.rsvp h2 em{color:var(--poppy)}
+.deadline{text-align:center;font-size:13px;color:var(--ink-soft);letter-spacing:.03em;margin-top:14px}
+form{margin-top:44px}
+.field{margin-bottom:28px}
+.lbl,.legend{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px;font-weight:400}
+input[type=text],textarea{
+  width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);
+  font:inherit;font-size:18px;color:var(--ink);padding:8px 0 10px;border-radius:0;outline:none;
+  transition:border-color .2s;-webkit-appearance:none;appearance:none;
+}
+textarea{resize:vertical;min-height:84px;font-size:16px;line-height:1.5}
+input:focus,textarea:focus{border-bottom-color:var(--ink)}
+::placeholder{color:#aaa192}
+fieldset{border:0}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice span{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-height:108px;padding:16px 10px;border:1px solid var(--line);background:rgba(255,255,255,.3);
+  cursor:pointer;text-align:center;transition:all .25s ease;
+}
+.choice b{font-family:var(--serif);font-weight:500;font-size:27px;line-height:1.1}
+.choice small{font-size:12px;color:var(--ink-soft)}
+.choice:hover span{border-color:var(--ink-soft)}
+.choice input:focus-visible + span{outline:2px solid var(--ink);outline-offset:3px}
+.choice.yes input:checked + span{background:var(--poppy);border-color:var(--poppy);color:#fff8ef}
+.choice.no input:checked + span{background:var(--ink);border-color:var(--ink);color:#fff8ef}
+.choice input:checked + span small{color:inherit;opacity:.85}
+.only-yes{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .45s ease,opacity .3s}
+.only-yes > div{overflow:hidden}
+.only-yes.open{grid-template-rows:1fr;opacity:1}
+.stepper{display:flex;align-items:center;border-bottom:1px solid var(--line)}
+.stepper button{width:44px;height:44px;border:0;background:none;font:inherit;font-size:22px;color:var(--ink);cursor:pointer}
+.stepper output{flex:1;text-align:center;font-family:var(--serif);font-size:28px}
+button.submit{
+  width:100%;margin-top:12px;padding:18px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+  font:inherit;font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:400;cursor:pointer;transition:background .2s,color .2s;
+}
+button.submit:hover{background:transparent;color:var(--ink)}
+button.submit:disabled{opacity:.5;cursor:wait}
+.error{color:var(--poppy);font-size:14px;margin-top:14px;text-align:center;min-height:1em}
+.thanks{display:none;text-align:center;margin-top:40px;animation:rise .7s ease both}
+.thanks h3{font-family:var(--serif);font-weight:400;font-size:46px;line-height:1.05;margin-bottom:12px}
+.thanks p{font-family:var(--serif);font-size:21px;color:var(--ink-soft)}
+.thanks a{color:var(--ink);font-size:13px;letter-spacing:.06em;display:inline-block;margin-top:26px}
+.done form{display:none}
+.done .thanks{display:block}
+footer{text-align:center;padding:56px 24px 64px;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--ink-soft)}
+footer small{display:block;font-family:var(--sans);font-style:normal;font-size:10px;letter-spacing:.3em;text-transform:uppercase;margin-top:8px}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .step > *,.reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ Scène : lavande → coquelicots → le lieu ============ -->
+<section class="stage" id="stage">
+  <div class="sticky" aria-hidden="true">
+    <div class="layer" id="lLav"></div>
+    <div class="layer" id="lPoppy"></div>
+    <div class="layer" id="lPhoto">
+      <div class="photo-bg"></div>
+      <div class="frame"><img src="lieu.jpg" alt=""></div>
+    </div>
+    <div class="cue" id="cue">Défiler<i></i></div>
+  </div>
+
+  <div class="steps">
+    <div class="step step-hero">
+      <p class="eyebrow">Nous nous marions</p>
+      <h1 id="names">Léa<span class="amp">&amp;</span>Gautier</h1>
+      <p class="sub">en Provence alpine</p>
+    </div>
+    <div class="step step-date">
+      <p class="eyebrow">Réservez la date</p>
+      <p class="big-date">1<sup>er</sup> juin<em>deux mille vingt-sept</em></p>
+      <div class="countdown" aria-label="Compte à rebours">
+        <div><b id="cdD">000</b><span>jours</span></div>
+        <div><b id="cdH">00</b><span>heures</span></div>
+        <div><b id="cdM">00</b><span>minutes</span></div>
+      </div>
+    </div>
+    <div class="step step-lieu">
+      <p class="eyebrow">Le lieu</p>
+      <p class="lieu-title" id="lieuTitle">Tallard</p>
+      <p class="lieu-addr" id="lieuAddr">Allée de la Madeleine · 05130 Tallard · Hautes-Alpes</p>
+      <a class="btn-ghost" id="mapsLink" href="#" target="_blank" rel="noopener">Itinéraire</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Réponse ============ -->
+<section class="rsvp" id="rsvp">
+  <div class="rsvp-inner">
+    <svg class="sprig reveal" viewBox="0 0 120 40" fill="none" aria-hidden="true">
+      <path d="M8 30 C40 26 80 20 112 8" stroke="#5f6b45" stroke-width="1.2" stroke-linecap="round"/>
+      <g fill="#7a68a6">
+        <ellipse cx="96" cy="10" rx="3" ry="1.8" transform="rotate(-25 96 10)"/><ellipse cx="102" cy="8" rx="3" ry="1.8" transform="rotate(-25 102 8)"/>
+        <ellipse cx="108" cy="5.5" rx="2.6" ry="1.6" transform="rotate(-25 108 5.5)"/><ellipse cx="99" cy="5" rx="2.4" ry="1.5" transform="rotate(-60 99 5)"/>
+        <ellipse cx="104" cy="13" rx="2.4" ry="1.5" transform="rotate(10 104 13)"/>
+      </g>
+      <g fill="#5f6b45" opacity=".85">
+        <ellipse cx="30" cy="22" rx="9" ry="2.6" transform="rotate(-28 30 22)"/><ellipse cx="34" cy="31" rx="9" ry="2.6" transform="rotate(18 34 31)"/>
+        <ellipse cx="55" cy="16" rx="9" ry="2.6" transform="rotate(-35 55 16)"/><ellipse cx="60" cy="27" rx="9" ry="2.6" transform="rotate(12 60 27)"/>
+        <ellipse cx="78" cy="12" rx="8" ry="2.4" transform="rotate(-38 78 12)"/>
+      </g>
+      <circle cx="14" cy="27" r="4.2" fill="#c0402b"/><circle cx="14" cy="27" r="1.3" fill="#2e2a24"/>
+    </svg>
+    <h2 class="reveal">Serez-vous <em>des nôtres</em>&nbsp;?</h2>
+    <p class="deadline reveal" id="deadline">Merci de répondre avant le 1er mai 2027</p>
+
+    <form id="form" class="reveal" novalidate>
+      <div class="field">
+        <label class="lbl" for="nom">Vos prénom(s) et nom</label>
+        <input type="text" id="nom" name="nom" autocomplete="name" placeholder="Ex. Marie et Paul Martin" required>
+      </div>
+      <fieldset class="field">
+        <legend class="legend">Serez-vous présent·e ?</legend>
+        <div class="choices">
+          <label class="choice yes"><input type="radio" name="presence" value="Oui" required><span><b>Avec joie</b><small>Je serai là</small></span></label>
+          <label class="choice no"><input type="radio" name="presence" value="Non"><span><b>Hélas non</b><small>Je ne pourrai pas venir</small></span></label>
+        </div>
+      </fieldset>
+      <div class="only-yes" id="onlyYes"><div>
+        <div class="field">
+          <span class="lbl">Nombre de personnes (vous compris)</span>
+          <div class="stepper">
+            <button type="button" data-step="-1" aria-label="Moins">−</button>
+            <output id="countOut" aria-live="polite">1</output>
+            <button type="button" data-step="1" aria-label="Plus">+</button>
+          </div>
+          <input type="hidden" name="personnes" id="personnes" value="1">
+        </div>
+        <div class="field">
+          <label class="lbl" for="regime">Allergies ou régime alimentaire</label>
+          <input type="text" id="regime" name="regime" placeholder="Végétarien, sans gluten…">
+        </div>
+      </div></div>
+      <div class="field">
+        <label class="lbl" for="message">Un petit mot (facultatif)</label>
+        <textarea id="message" name="message" placeholder="Pour les mariés…"></textarea>
+      </div>
+      <button class="submit" type="submit" id="submit">Envoyer ma réponse</button>
+      <p class="error" id="error" role="alert"></p>
+    </form>
+
+    <div class="thanks" id="thanks" aria-live="polite">
+      <h3 id="thanksTitle">Merci&nbsp;!</h3>
+      <p id="thanksText"></p>
+      <a href="#" id="again">Modifier ma réponse</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span id="footer">Avec tout notre amour</span>
+  <small id="footerNames">Léa &amp; Gautier · 01.06.2027</small>
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG : modifiez uniquement ce bloc
+   ============================================================ */
+const CONFIG = {
+  prenom1:  "Léa",
+  prenom2:  "Gautier",
+  dateISO:  "2027-06-01T15:00:00+02:00",  // date et heure de la cérémonie (pour le compte à rebours)
+  lieu:     "Tallard",
+  adresse:  "Allée de la Madeleine · 05130 Tallard · Hautes-Alpes",
+  maps:     "https://www.google.com/maps/search/?api=1&query=All%C3%A9e+de+la+Madeleine+05130+Tallard",
+  limite:   "Merci de répondre avant le 1er mai 2027",   // ← à confirmer
+  maxPersonnes: 6,
+  merciOui: "Nous avons hâte de célébrer ce jour avec vous.",
+  merciNon: "Vous nous manquerez. Merci d'avoir pris le temps de répondre.",
+  footer:   "Avec tout notre amour",
+  // URL du script Google (voir GUIDE.md, étape 1). Vide = mode démo (rien n'est enregistré).
+  scriptUrl: ""
+};
+/* ============================================================ */
+
+const $ = s => document.querySelector(s);
+$("#names").innerHTML = `${CONFIG.prenom1}<span class="amp">&amp;</span>${CONFIG.prenom2}`;
+$("#lieuTitle").textContent = CONFIG.lieu;
+$("#lieuAddr").textContent = CONFIG.adresse;
+$("#mapsLink").href = CONFIG.maps;
+$("#deadline").textContent = CONFIG.limite;
+$("#footer").textContent = CONFIG.footer;
+
+/* ---------- Illustrations (SVG générés, nets sur tous les écrans) ---------- */
+function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const NS = "http://www.w3.org/2000/svg";
+const mountains = (y, h, color, seed, op=1) => {
+  const r = rng(seed); let d = `M0 ${y}`; let x = 0;
+  while (x < 1000){ x += 40 + r()*70; d += ` L${x.toFixed(0)} ${(y - r()*h).toFixed(0)}`; }
+  return `<path d="${d} L1000 ${y+60} L0 ${y+60}Z" fill="${color}" opacity="${op}"/>`;
+};
+
+function lavenderSVG(){
+  const r = rng(7), H = 470, N = 26; let rows = "", dots = "";
+  for (let i = 0; i <= N; i++){
+    const xb = -1800 + i * (4600 / N), w = 52;
+    rows += `<path d="M500 ${H} L${xb-w} 1000 L${xb+w} 1000Z" fill="url(#lv)"/>`;
+  }
+  for (let k = 0; k < 900; k++){
+    const i = Math.floor(r()*(N+1)), xb = -1800 + i*(4600/N);
+    const y = H + 8 + Math.pow(r(), .7) * (1000 - H);
+    const f = (y - H) / (1000 - H);
+    const x = 500 + (xb - 500) * f + (r()-.5) * 90 * f;
+    const c = ["#9d88c9","#8a74b9","#b4a2da","#6f5b9f"][Math.floor(r()*4)];
+    dots += `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${(1+f*7).toFixed(1)}" ry="${(1.6+f*12).toFixed(1)}" fill="${c}" opacity="${(.5+f*.5).toFixed(2)}"/>`;
+  }
+  return `<svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" xmlns="${NS}">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe3cf"/><stop offset=".75" stop-color="#f4d7b4"/><stop offset="1" stop-color="#eebf95"/></linearGradient>
+      <linearGradient id="lv" gradientUnits="userSpaceOnUse" x1="0" y1="${H}" x2="0" y2="1000"><stop offset="0" stop-color="#b9a9d8"/><stop offset="1" stop-color="#6b569c"/></linearGradient>
+      <linearGradient id="soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d8a6a"/><stop offset="1" stop-color="#4a4630"/></linearGradient>
+      <radialGradient id="sun"><stop offset="0" stop-color="#fff2d8"/><stop offset="1" stop-color="#fff2d8" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="1000" height="${H+1}" fill="url(#sky)"/>
+    <circle cx="690" cy="${H-40}" r="160" fill="url(#sun)"/>
+    ${mountains(H-50, 120, "#c9bba8", 3, .8)}
+    ${mountains(H-12, 50, "#a6a585", 11)}
+    <rect y="${H}" width="1000" height="${1000-H}" fill="url(#soil)"/>
+    ${rows}${dots}
+  </svg>`;
+}
+
+function poppySVG(){
+  const r = rng(21), H = 520; let fl = "";
+  const items = [];
+  for (let k = 0; k < 520; k++){
+    const y = H + 5 + Math.pow(r(), 1.6) * (1080 - H);
+    items.push({ x: r()*1000, y, blue: r() < .12 });
+  }
+  items.sort((a,b) => a.y - b.y);
+  for (const p of items){
+    const f = (p.y - H) / (1000 - H), s = .8 + f * f * 26;
+    if (p.blue){ fl += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${(s*.45).toFixed(1)}" fill="#7f86c4" opacity=".9"/>`; continue; }
+    const c = ["#c63a25","#d9482d","#b02e1d","#e2593a"][Math.floor(r()*4)];
+    if (s > 6) fl += `<path d="M${p.x.toFixed(1)} ${(p.y+s*.6).toFixed(1)} q ${((r()-.5)*s).toFixed(1)} ${(s*1.6).toFixed(1)} ${((r()-.5)*s*.6).toFixed(1)} ${(s*3.2).toFixed(1)}" stroke="#4f5a2e" stroke-width="${(s*.07).toFixed(2)}" fill="none"/>`;
+    fl += `<ellipse cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" rx="${s.toFixed(1)}" ry="${(s*.72).toFixed(1)}" fill="${c}"/>`;
+    if (s > 9) fl += `<circle cx="${(p.x+s*.1).toFixed(1)}" cy="${(p.y-s*.12).toFixed(1)}" r="${(s*.18).toFixed(1)}" fill="#2a2018"/>`;
+  }
+  return `<svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" xmlns="${NS}">
+    <defs>
+      <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7ece6"/><stop offset="1" stop-color="#f3ead6"/></linearGradient>
+      <linearGradient id="meadow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a7ac72"/><stop offset=".5" stop-color="#7f8a4c"/><stop offset="1" stop-color="#55602f"/></linearGradient>
+    </defs>
+    <rect width="1000" height="1000" fill="url(#sky2)"/>
+    ${mountains(H-90, 170, "#cfc8b9", 5, .9)}
+    ${mountains(H-30, 60, "#7d8a57", 9)}
+    <rect y="${H}" width="1000" height="${1000-H}" fill="url(#meadow)"/>
+    ${fl}
+  </svg>`;
+}
+$("#lLav").innerHTML = lavenderSVG();
+$("#lPoppy").innerHTML = poppySVG();
+
+/* ---------- Défilement : fondus et mouvements ---------- */
+const stage = $("#stage"), lLav = $("#lLav"), lPoppy = $("#lPoppy"), lPhoto = $("#lPhoto"),
+      frameImg = $(".frame img"), cue = $("#cue");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp = (v,a=0,b=1) => Math.min(b, Math.max(a, v));
+const ease = t => t*t*(3-2*t);
+function onScroll(){
+  const vh = innerHeight, top = stage.getBoundingClientRect().top;
+  const t = clamp(-top / vh, 0, 2.6);               // 0 = accueil, 1 = date, 2 = lieu
+  const a = ease(clamp((t - .45) / .55)), b = ease(clamp((t - 1.45) / .55));
+  lPoppy.style.opacity = a;
+  lPhoto.style.opacity = b;
+  cue.style.opacity = 1 - clamp(t * 3);
+  if (reduce) return;
+  lLav.style.transform   = `scale(${1.02 + t*.06}) translateY(${-t*2}%)`;
+  lPoppy.style.transform = `scale(${1.14 - a*.1 + clamp(t-1)*.05})`;
+  lPhoto.style.transform = `scale(${1.06 - b*.06})`;
+  frameImg.style.transform = `scale(${1.18 - clamp(t-1.45, 0, 1.15)*.14})`;
+}
+addEventListener("scroll", () => requestAnimationFrame(onScroll), { passive: true });
+addEventListener("resize", onScroll);
+onScroll();
+
+const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("in", e.isIntersecting)), { threshold: .35 });
+document.querySelectorAll(".step").forEach(el => io.observe(el));
+const io2 = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io2.unobserve(e.target); } }), { threshold: .15 });
+document.querySelectorAll(".reveal").forEach(el => io2.observe(el));
+
+/* ---------- Compte à rebours ---------- */
+const target = new Date(CONFIG.dateISO).getTime();
+function tick(){
+  let s = Math.max(0, Math.floor((target - Date.now()) / 1000));
+  const d = Math.floor(s / 86400); s -= d * 86400;
+  $("#cdD").textContent = d;
+  $("#cdH").textContent = String(Math.floor(s / 3600)).padStart(2, "0");
+  $("#cdM").textContent = String(Math.floor(s % 3600 / 60)).padStart(2, "0");
+}
+tick(); setInterval(tick, 30000);
+
+/* ---------- Formulaire ---------- */
+const form = $("#form"), onlyYes = $("#onlyYes"), countOut = $("#countOut"), countIn = $("#personnes");
+let count = 1;
+form.addEventListener("change", e => {
+  if (e.target.name === "presence") onlyYes.classList.toggle("open", e.target.value === "Oui");
+  $("#error").textContent = "";
+});
+document.querySelectorAll("[data-step]").forEach(b => b.addEventListener("click", () => {
+  count = Math.min(CONFIG.maxPersonnes, Math.max(1, count + Number(b.dataset.step)));
+  countOut.textContent = countIn.value = count;
+}));
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = new FormData(form);
+  const nom = (data.get("nom") || "").trim(), presence = data.get("presence");
+  if (!nom){ $("#error").textContent = "Merci d'indiquer votre nom."; $("#nom").focus(); return; }
+  if (!presence){ $("#error").textContent = "Merci d'indiquer si vous serez présent·e."; return; }
+  if (presence === "Non"){ data.set("personnes", "0"); data.set("regime", ""); }
+  const btn = $("#submit"); btn.disabled = true; btn.textContent = "Envoi…";
+  try {
+    if (CONFIG.scriptUrl) await fetch(CONFIG.scriptUrl, { method: "POST", mode: "no-cors", body: new URLSearchParams(data) });
+    else { await new Promise(r => setTimeout(r, 600)); console.info("Mode démo : réponse non enregistrée", Object.fromEntries(data)); }
+    const prenom = nom.split(/\s+/)[0];
+    $("#thanksTitle").textContent = presence === "Oui" ? `Merci ${prenom} !` : `Merci ${prenom}.`;
+    $("#thanksText").textContent = presence === "Oui" ? CONFIG.merciOui : CONFIG.merciNon;
+    document.body.classList.add("done");
+    $("#rsvp").scrollIntoView({ behavior: "smooth" });
+  } catch (err) {
+    $("#error").textContent = "Oups, l'envoi n'a pas fonctionné. Vérifiez votre connexion et réessayez.";
+  } finally { btn.disabled = false; btn.textContent = "Envoyer ma réponse"; }
+});
+$("#again").addEventListener("click", e => { e.preventDefault(); document.body.classList.remove("done"); });
+</script>
+</body>
+</html>
