@@ -38,22 +38,15 @@ img{display:block}
 .stage{position:relative}
 .sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:#2a2420}
 .layer{position:absolute;inset:0;will-change:opacity,transform}
-#lLieu{opacity:0}
+#lProg{opacity:0}
 
 /* Scène 1 : nous deux */
 #lNous img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 22%;transform-origin:60% 30%;will-change:transform}
 #lNous::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.05) 35%,rgba(20,16,12,.55) 68%,rgba(20,16,12,.85))}
 
-/* Scène 2 : le lieu (fond flou + arche) */
-.photo-bg{position:absolute;inset:-40px;background:url(lieu.jpg) center/cover;filter:blur(22px) saturate(1.1);transform:scale(1.1)}
-.photo-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,24,18,.15),rgba(30,24,18,.55) 70%,rgba(30,24,18,.75))}
-.shade{position:absolute;inset:0;background:rgba(28,22,17,.62);opacity:0}
-.frame{
-  position:absolute;left:50%;top:max(9svh,56px);transform:translateX(-50%);
-  width:min(86vw,640px);aspect-ratio:4/3.4;border-radius:999px 999px 6px 6px;overflow:hidden;
-  box-shadow:0 30px 60px -20px rgba(0,0,0,.45);border:6px solid var(--paper);
-}
-.frame img{width:100%;height:100%;object-fit:cover;object-position:42% 60%;transform-origin:50% 70%;will-change:transform}
+/* Scène 2 : fond du déroulé (vignes floues) */
+.prog-bg{position:absolute;inset:-40px;background:url(vignes.jpg) center/cover;filter:blur(18px) saturate(1.1);transform:scale(1.1)}
+.prog-bg::after{content:"";position:absolute;inset:0;background:rgba(28,22,17,.6)}
 
 /* Textes */
 .steps{position:relative;margin-top:-100svh;color:var(--paper)}
@@ -79,45 +72,38 @@ h1 .amp{font-style:italic;color:var(--poppy-light);font-size:.6em;margin:0 .08em
 .btn-ghost{display:inline-block;margin-top:18px;padding:11px 20px;border:1px solid rgba(245,237,224,.6);color:var(--paper);text-decoration:none;font-size:10px;letter-spacing:.26em;text-transform:uppercase;transition:background .25s,color .25s}
 .btn-ghost:hover{background:var(--paper);color:var(--ink)}
 
-/* Déroulé */
-.step-prog{min-height:auto;padding:12svh 24px 16svh;align-items:stretch}
+/* Déroulé (compact) */
+.step-prog{justify-content:center;align-items:stretch;padding:9svh 20px}
 .step-prog > *{opacity:1;transform:none}
-.prog-head{text-align:center;margin-bottom:56px}
-.prog-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(42px,12vw,72px);line-height:1;margin-top:12px}
-.timeline{list-style:none;max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:72px}
-.item{display:grid;gap:22px;text-align:left;opacity:0;transform:translateY(40px);transition:opacity 1s ease,transform 1s ease}
+.prog-head{text-align:center;margin-bottom:30px}
+.prog-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(38px,11vw,64px);line-height:1;margin-top:8px}
+.timeline{list-style:none;max-width:1080px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.item{display:grid;grid-template-columns:38% 1fr;gap:18px;align-items:center;text-align:left;opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
+.item:nth-child(2){transition-delay:.12s}.item:nth-child(3){transition-delay:.24s}
 .item.in{opacity:1;transform:none}
-.item figure{overflow:hidden;border-radius:4px;box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}
+.item figure{overflow:hidden;border-radius:4px;aspect-ratio:1/1;box-shadow:0 18px 40px -20px rgba(0,0,0,.7)}
 .item figure img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
 .item.in figure img{transform:scale(1)}
-.item .f-mairie{aspect-ratio:16/10}
-.item .f-eglise{aspect-ratio:4/5}
-.item .f-eglise img{object-position:50% 30%}
-.item .f-vignes{aspect-ratio:4/5}
-.item .time{opacity:1;margin-top:0;font-family:var(--serif);font-size:clamp(54px,15vw,84px);line-height:.9;color:var(--poppy-light);letter-spacing:-.02em}
+.item .f-eglise img{object-position:50% 25%}
+.item .f-ferme{border-radius:999px 999px 4px 4px;border:3px solid var(--paper);aspect-ratio:4/5}
+.item .f-ferme img{object-position:40% 60%}
+.item .time{opacity:1;margin-top:0;font-family:var(--serif);font-size:clamp(34px,10vw,52px);line-height:.95;color:var(--poppy-light);letter-spacing:-.02em}
 .time small{font-size:.5em}
-.item h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,7vw,36px);line-height:1.1;margin-top:10px}
-.item p{opacity:.85;margin-top:8px;font-size:15px}
-.item .btn-ghost{margin-top:16px}
+.item h3{font-family:var(--serif);font-weight:400;font-size:clamp(19px,5.2vw,26px);line-height:1.15;margin-top:4px}
+.item p{opacity:.85;margin-top:2px;font-size:13px}
+.item .btn-ghost{margin-top:10px;padding:7px 12px;font-size:9px}
 @media (min-width:820px){
-  .item{grid-template-columns:1.1fr 1fr;align-items:center;gap:56px}
-  .item:nth-child(even) figure{order:2}
-  .item .f-eglise,.item .f-vignes{max-height:70svh;aspect-ratio:3/4;justify-self:center;width:min(100%,420px)}
+  .timeline{flex-direction:row;gap:32px}
+  .item{flex:1;grid-template-columns:1fr;align-content:start;gap:16px}
+  .item figure{aspect-ratio:4/5;max-height:46svh;width:100%}
 }
 
-/* Grand écran : scène 1 en deux colonnes */
+/* Grand écran : photo plein écran */
 @media (min-width:900px){
-  #lNous{background:var(--paper)}
-  #lNous img{left:44%;width:56%}
-  #lNous::after{display:none}
-  .step-hero{justify-content:center;align-items:flex-start;text-align:left;width:44%;padding:0 4vw 0 6vw;color:var(--ink)}
-  .step-hero h1{font-size:clamp(56px,6.2vw,100px)}
-  .step-hero h1 .amp{color:var(--poppy)}
-  .step-hero .countdown{justify-content:flex-start;border-top-color:var(--line)}
-  .frame{width:min(46vw,620px);aspect-ratio:16/11;top:10svh}
+  #lNous img{object-position:50% 26%}
+  .step-hero h1{font-size:clamp(64px,7vw,112px)}
 }
 .cue{position:absolute;bottom:max(2.5svh,14px);left:50%;transform:translateX(-50%);width:1px;height:34px;background:rgba(245,237,224,.7);transform-origin:top;animation:drop 2.2s ease-in-out infinite;transition:opacity .4s}
-@media (min-width:900px){.cue{left:22%;background:var(--ink-soft)}}
 @keyframes drop{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:top}50.1%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* ================= Formulaire ================= */
@@ -191,11 +177,7 @@ footer small{display:block;font-family:var(--sans);font-style:normal;font-size:1
 <section class="stage" id="stage">
   <div class="sticky" aria-hidden="true">
     <div class="layer" id="lNous"><img src="nous.jpg" alt=""></div>
-    <div class="layer" id="lLieu">
-      <div class="photo-bg"></div>
-      <div class="frame" id="frame"><img src="lieu.jpg" alt=""></div>
-      <div class="shade" id="shade"></div>
-    </div>
+    <div class="layer" id="lProg"><div class="prog-bg"></div></div>
     <i class="cue" id="cue"></i>
   </div>
 
@@ -210,13 +192,6 @@ footer small{display:block;font-family:var(--sans);font-style:normal;font-size:1
         <div><b id="cdM">00</b><span>minutes</span></div>
         <div><b id="cdS">00</b><span>secondes</span></div>
       </div>
-    </div>
-
-    <div class="step step-lieu">
-      <p class="eyebrow">La réception</p>
-      <p class="lieu-title" id="lieuTitle">Tallard</p>
-      <p class="lieu-addr" id="lieuAddr">Allée de la Madeleine · 05130 Tallard · Hautes-Alpes</p>
-      <a class="btn-ghost" id="mapsLink" href="#" target="_blank" rel="noopener">Itinéraire</a>
     </div>
 
     <div class="step step-prog">
@@ -244,12 +219,12 @@ footer small{display:block;font-family:var(--sans);font-style:normal;font-size:1
           </div>
         </li>
         <li class="item">
-          <figure class="f-vignes"><img src="vignes.jpg" alt="Les vignes et montagnes autour de Tallard" loading="lazy"></figure>
+          <figure class="f-ferme"><img src="lieu.jpg" alt="La Ferme de la Madeleine à Tallard" loading="lazy"></figure>
           <div>
             <p class="time">16<small>h</small>15</p>
-            <h3>Départ pour le lieu du mariage</h3>
-            <p>Allée de la Madeleine, Tallard</p>
-            <a class="btn-ghost" id="mapsLink2" href="#" target="_blank" rel="noopener">Itinéraire</a>
+            <h3>Départ pour la Ferme de la Madeleine</h3>
+            <p id="lieuAddr">Allée de la Madeleine · 05130 Tallard</p>
+            <a class="btn-ghost" id="mapsLink" href="#" target="_blank" rel="noopener">Itinéraire</a>
           </div>
         </li>
       </ol>
@@ -333,8 +308,7 @@ const CONFIG = {
   prenom1:  "Léa",
   prenom2:  "Gautier",
   dateISO:  "2027-06-01T14:30:00+02:00",  // rendez-vous à la mairie (sert au compte à rebours)
-  lieu:     "Tallard",
-  adresse:  "Allée de la Madeleine · 05130 Tallard · Hautes-Alpes",
+  adresse:  "Allée de la Madeleine · 05130 Tallard",
   maps:     "https://www.google.com/maps/search/?api=1&query=All%C3%A9e+de+la+Madeleine+05130+Tallard",
   limite:   "Merci de répondre avant le 1er mai 2027",   // ← à confirmer
   maxPersonnes: 6,
@@ -348,31 +322,24 @@ const CONFIG = {
 
 const $ = s => document.querySelector(s);
 $("#names").innerHTML = `${CONFIG.prenom1}<span class="amp">&amp;</span>${CONFIG.prenom2}`;
-$("#lieuTitle").textContent = CONFIG.lieu;
 $("#lieuAddr").textContent = CONFIG.adresse;
-$("#mapsLink").href = $("#mapsLink2").href = CONFIG.maps;
+$("#mapsLink").href = CONFIG.maps;
 $("#deadline").textContent = CONFIG.limite;
 $("#footer").textContent = CONFIG.footer;
 
 /* ---------- Défilement : fondus et mouvements ---------- */
-const stage = $("#stage"), lNous = $("#lNous"), nousImg = $("#lNous img"), lLieu = $("#lLieu"),
-      frame = $("#frame"), frameImg = $("#frame img"), shade = $("#shade"), cue = $("#cue");
+const stage = $("#stage"), nousImg = $("#lNous img"), lProg = $("#lProg"), cue = $("#cue");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const clamp = (v,a=0,b=1) => Math.min(b, Math.max(a, v));
 const ease = t => t*t*(3-2*t);
 function onScroll(){
-  const t = Math.max(0, -stage.getBoundingClientRect().top / innerHeight);  // 0 = accueil, 1 = lieu, 2+ = déroulé
-  const a = ease(clamp((t - .45) / .55));        // apparition du lieu
-  const c = ease(clamp((t - 1.3) / .6));         // passage au déroulé
-  lLieu.style.opacity = a;
-  frame.style.opacity = 1 - c;
-  shade.style.opacity = c;
+  const t = Math.max(0, -stage.getBoundingClientRect().top / innerHeight);  // 0 = accueil, 1 = déroulé
+  const a = ease(clamp((t - .35) / .55));
+  lProg.style.opacity = a;
   cue.style.opacity = 1 - clamp(t * 3);
   if (reduce) return;
-  nousImg.style.transform = `scale(${1 + clamp(t) * .08})`;
-  lLieu.style.transform = `scale(${1.06 - a*.06})`;
-  frame.style.transform = `translateX(-50%) translateY(${-c*40}px) scale(${1 - c*.06})`;
-  frameImg.style.transform = `scale(${1.18 - clamp(t-.45, 0, 1)*.18})`;
+  nousImg.style.transform = `scale(${1 + clamp(t) * .1})`;
+  lProg.style.transform = `scale(${1.08 - a*.08})`;
 }
 addEventListener("scroll", () => requestAnimationFrame(onScroll), { passive: true });
 addEventListener("resize", onScroll);
